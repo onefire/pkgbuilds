@@ -1,0 +1,54 @@
+# Maintainer: onefire <onefire.myself@gmail.com>
+pkgname=('opencl-nvidia-custom')
+pkgver=304.22
+pkgrel=1
+pkgdesc="OpenCL implemention for NVIDIA. Customized to use driver 304.22 and to be compatible with libgl"
+depends=('libcl' 'zlib')
+optdepends=('opencl-headers: headers necessary for OpenCL development')
+arch=('i686' 'x86_64')
+url="http://www.nvidia.com/"
+license=('custom')
+options=('!strip')
+provides=('opencl-nvidia')
+conflicts=()
+groups=('nvidia-cuda' 'custom')
+
+if [ "$CARCH" = "i686" ]; then
+    _arch='x86'
+    _pkg="NVIDIA-Linux-${_arch}-${pkgver}"
+    source=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+    md5sums=('4263d20f6cdbebe9c3ec0f05a7bb3e9f')
+elif [ "$CARCH" = "x86_64" ]; then
+    _arch='x86_64'
+    _pkg="NVIDIA-Linux-${_arch}-${pkgver}-no-compat32"
+    source=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+    md5sums=('cbeef4cda64b0ea3cc8ca2567dcc656d')
+fi
+
+create_links() {
+    # create soname links
+    while read -d '' _lib; do
+        _soname="$(dirname "${_lib}")/$(readelf -d "${_lib}" | sed -nr 's/.*Library soname: \[(.*)\].*/\1/p')"
+        [[ -e "${_soname}" ]] || ln -s "$(basename "${_lib}")" "${_soname}"
+        [[ -e "${_soname/.[0-9]*/}" ]] || ln -s "$(basename "${_soname}")" "${_soname/.[0-9]*/}"
+    done < <(find "${pkgdir}" -type f -name '*.so*' -print0)
+}
+
+build() {
+    cd "${srcdir}"
+    sh "$_pkg.run" --extract-only
+}
+
+package() {
+    cd "${srcdir}/$_pkg"
+
+    # OpenCL
+    install -D -m644 nvidia.icd "${pkgdir}/etc/OpenCL/vendors/nvidia.icd"
+    install -D -m755 "libnvidia-compiler.so.${pkgver}" "${pkgdir}/usr/lib/libnvidia-compiler.so.${pkgver}"
+    # CUDA
+    install -D -m755 "libcuda.so.${pkgver}" "${pkgdir}/usr/lib/libcuda.so.${pkgver}"
+    install -D -m755 "libnvcuvid.so.${pkgver}" "${pkgdir}/usr/lib/libnvcuvid.so.${pkgver}"
+    create_links
+}
+
+
