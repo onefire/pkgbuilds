@@ -1,8 +1,8 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=('opencl-nvidia-custom')
-pkgver=304.22
+pkgver=304.30
 pkgrel=1
-pkgdesc="OpenCL implemention for NVIDIA. Customized to use driver 304.22 and to be compatible with libgl"
+pkgdesc="OpenCL implemention for NVIDIA. Customized to be compatible with libgl. This and my package nvidia-utils-custom are broken down in two packages because the AUR does not support multiple packages per PKGBUILD."
 depends=('libcl' 'zlib')
 optdepends=('opencl-headers: headers necessary for OpenCL development')
 arch=('i686' 'x86_64')
@@ -17,12 +17,12 @@ if [ "$CARCH" = "i686" ]; then
     _arch='x86'
     _pkg="NVIDIA-Linux-${_arch}-${pkgver}"
     source=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
-    md5sums=('4263d20f6cdbebe9c3ec0f05a7bb3e9f')
+    md5sums=('2fb7a7e00404145a842d32b691ea94b6')
 elif [ "$CARCH" = "x86_64" ]; then
     _arch='x86_64'
     _pkg="NVIDIA-Linux-${_arch}-${pkgver}-no-compat32"
     source=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
-    md5sums=('cbeef4cda64b0ea3cc8ca2567dcc656d')
+    md5sums=('780561a808dffbfc74be84547733f30f')
 fi
 
 create_links() {
