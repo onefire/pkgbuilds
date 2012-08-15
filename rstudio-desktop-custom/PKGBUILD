@@ -1,0 +1,38 @@
+# Maintainer: onefire <onefire.myself@gmail.com>
+pkgname=rstudio-desktop-custom
+pkgver=0.96.330
+pkgrel=1
+pkgdesc="An IDE for R"
+arch=('i686' 'x86_64')
+license=('GPL')
+url="http://www.rstudio.org/"
+depends=('r>=2.11.1' 'pango>=1.14.0' 'qtwebkit')
+conflicts=('rstudio-desktop' 'rstudio-desktop-git')
+provides=("rstudio-desktop=${pkgver}")
+groups=('custom')
+
+case "$CARCH" in
+	'i686')
+		_arch=i386
+		md5sums=('f75f95653ed6d3c99bf3c5bf0199d2c5')
+		;;
+	'x86_64')
+		_arch=amd64
+		md5sums=('dbe87f210bbd712b7447381755e510ce')
+		;;
+esac    
+
+source=("http://download1.rstudio.org/rstudio-${pkgver}-${_arch}.deb")
+
+build() {
+msg "Getting contents of .deb package..."
+cd "$srcdir"
+tar zxpf data.tar.gz -C "$pkgdir"
+}
+
+package() {
+  install -dm755 "$pkgdir/usr/bin"
+  cd "$pkgdir/usr/lib/rstudio/bin"
+  cd "$pkgdir/usr/bin"
+  ln -s -f ../lib/rstudio/bin/rstudio rstudio-bin
+}
