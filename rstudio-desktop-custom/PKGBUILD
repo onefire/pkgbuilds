@@ -11,23 +11,21 @@ conflicts=('rstudio-desktop' 'rstudio-desktop-git')
 provides=("rstudio-desktop=${pkgver}")
 groups=('custom')
 
-case "$CARCH" in
-	'i686')
-		_arch=i386
-		md5sums=('f75f95653ed6d3c99bf3c5bf0199d2c5')
-		;;
-	'x86_64')
-		_arch=amd64
-		md5sums=('dbe87f210bbd712b7447381755e510ce')
-		;;
-esac    
+if [ "$CARCH" = "i686" ]; then
+	_arch=i386
+	sha256sums=('8230e652dd4500f5c8fe4c8764f2dd966637ba82c1ad133e472e464e05059ffa')
+
+elif [ "$CARCH" = "x86_64" ]; then
+	_arch=amd64
+	sha256sums=('1954b9e06c9e99b01f095acabba6d6922715081b634bfd79a2d9c79478757dc7')
+fi
 
 source=("http://download1.rstudio.org/rstudio-${pkgver}-${_arch}.deb")
 
 build() {
-msg "Getting contents of .deb package..."
-cd "$srcdir"
-tar zxpf data.tar.gz -C "$pkgdir"
+  msg "Getting contents of .deb package..."
+  cd "$srcdir"
+  tar zxpf data.tar.gz -C "$pkgdir"
 }
 
 package() {
