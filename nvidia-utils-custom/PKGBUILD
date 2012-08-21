@@ -1,5 +1,4 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
-CARCH=i686
 pkgname=('nvidia-utils-custom')
 pkgver=304.37
 pkgrel=2
