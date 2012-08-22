@@ -1,5 +1,5 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
-pkgname=julia-CuMatrix-git
+pkgname=julia-cumatrix-git
 pkgver=20120822
 pkgrel=1
 pkgdesc="A CUDA matrix library for the Julia language."
