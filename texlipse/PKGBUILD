@@ -1,0 +1,17 @@
+# Maintainer: onefire <onefire.myself@gmal.com>
+pkgname=texlipse
+pkgver=1.5.0
+pkgrel=1
+pkgdesc="A plugin that adds LaTeX support to the Eclipse IDE"
+url="http://texlipse.sourceforge.net/"
+depends=('eclipse>=3.3' 'texlive-core')
+arch=('any')
+license=('EPL')
+source=("http://sourceforge.net/projects/${pkgname}/files/texlipse%20plugin/1.5.0/${pkgname}_${pkgver}%20src.zip")
+sha256sums=('002a738bc33172f80003045cd7edc5832eb1435df54d8ba27821fbf93dabfb9d')
+
+package() {
+  cd "${srcdir}"
+  install -d "${pkgdir}"/usr/share/eclipse/dropins/eclipse
+  cp -rvp plugins "${pkgdir}"/usr/share/eclipse/dropins/eclipse/plugins
+}
