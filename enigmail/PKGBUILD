@@ -1,0 +1,30 @@
+# Maintainer: onefire <onefire.myself@gmail.com>
+pkgname=enigmail
+_pkg_main_ver=1.4
+pkgver=${_pkg_main_ver}.4
+pkgrel=1
+pkgdesc="Enables GnuPG encryption plugin for Thunderbird. Use to sign and encrypt emails."
+arch=('any')
+url="http://www.mozilla-enigmail.org/"
+license=('MPL')
+_tb_min_ver="13.0"
+depends=("thunderbird>=${_tb_min_ver}")
+makedepends=('unzip')
+provides=('enigmail')
+conflicts=('enigmail' 'enigmail-cvs')
+replaces=('enigmail-64-bin')
+options=(!strip)
+source=(http://www.mozilla-enigmail.org/download/release/${_pkg_main_ver}/enigmail-${pkgver}-tb+sm.xpi)
+noextract=(enigmail-${pkgver}-tb+sm.xpi)
+sha256sums=('e8184c8669bc3be997eacf1ae0e7a7ad7dab0990fababb1789b5afa78aa0d1f1')
+
+build() {
+  cd "${srcdir}"
+  unzip *.xpi
+  _eid=$(grep "<em:id>" install.rdf | head -n 1 | cut -f 2 -d \>| cut -f 1 -d \<)
+  mkdir -p "${pkgdir}/usr/lib/thunderbird/extensions/"
+  unzip -d "${pkgdir}/usr/lib/thunderbird/extensions/${_eid}" *.xpi
+}
+
+
+
