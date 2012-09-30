@@ -1,0 +1,34 @@
+# Maintainer: onefire <onefire.myself@gmail.com>
+pkgname=python-scipy-intel
+pkgver=0.11.0
+pkgrel=1
+pkgdesc="Scipy built with Intel's Math Kernel Library. Optimized for performance. Intel's mkl is not listed as a dependency, but you NEED TO INSTALL IT FIRST (manually or via AUR)"
+arch=(x86_64)
+url="http://numpy.scipy.org/"
+depends=("python" "python-numpy-intel")
+makedepends=
+conflicts=('python-scipy')
+provides=('python-scipy')
+license=('custom')
+options=(!strip)
+groups=('custom' 'python-intel')
+
+sha256sums=('b2b74d56a2d58a4f032f91e8b91b1c2272d5eb0b5010082dd1e492e452f862ee')
+
+source=("http://downloads.sourceforge.net/scipy/scipy-${pkgver}.tar.gz")
+
+build() {
+  cd ${srcdir}/scipy-${pkgver}
+  python setup.py config --compiler=intelem --fcompiler=intelem build_clib --compiler=intelem --fcompiler=intelem build_ext --compiler=intelem --fcompiler=intelem
+}
+
+package() {
+  cd ${srcdir}/scipy-${pkgver}
+  python setup.py install --prefix=/usr --root=${pkgdir}
+  install -m755 -d "${pkgdir}/usr/share/licenses/python-scipy"
+  install -m644 LICENSE.txt ${pkgdir}/usr/share/licenses/python-scipy/LICENSE  
+  install -m755 -d ${pkgdir}/etc/profile.d
+  echo "export LD_LIBRARY_PATH=/opt/intel/composer_xe_2013.0.079/mkl/lib/intel64:/opt/intel/composer_xe_2013.0.079/compiler/lib/intel64:\$LD_LIBRARY_PATH" > ${pkgdir}/etc/profile.d/scipy.sh
+}
+
+
