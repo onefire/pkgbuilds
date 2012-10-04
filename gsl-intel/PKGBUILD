@@ -1,0 +1,28 @@
+#Maintainer: onefire <onefire.myself@gmail.com>
+pkgname=gsl-intel
+_pkg=gsl
+pkgver=1.15
+pkgrel=1
+pkgdesc="The GNU Scientific Library (GSL). Built with the Intel compilers"
+url="http://www.gnu.org/software/gsl/gsl.html"
+source=("http://ftp.belnet.be/mirror/ftp.gnu.org/gnu/gsl/$_pkg-$pkgver.tar.gz")
+install=gsl.install
+license=('GPL')
+arch=('i686' 'x86_64')
+depends=('glibc' 'bash')
+conflicts=('gsl')
+provides=('gsl')
+options=('!libtool')
+sha256sums=('85b907e57902e2b7606ef3aef960302ffdd13bd9dc5b8fcbfa75e4f0bf340ea3')
+
+build() {
+  unset LDFLAGS
+  cd ${srcdir}/${_pkg}-${pkgver}
+  ./configure --prefix=/usr FC=ifort CC=icc CFLAGS="-O3 -m64 -openmp -fp-model strict -fomit-frame-pointer -xhost"  
+  make -j 8
+}
+
+package() {
+  cd ${srcdir}/${_pkg}-${pkgver}
+  make DESTDIR=${pkgdir} install
+}
