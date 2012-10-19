@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 url="http://www.nvidia.com/"
 license=('custom')
 options=('!strip')
-provides=('nvidia-utils')
+provides=('nvidia-utils=304.51')
 conflicts=('nvidia-utils' 'nvidia-utils-bumblebee')
 groups=('nvidia-cuda' 'custom')
 
@@ -61,6 +61,10 @@ package() {
 
   install -D -m755 "libnvidia-ml.so.${pkgver}" "${pkgdir}/usr/lib/libnvidia-ml.so.${pkgver}"
 
+  # CUDA
+  install -D -m755 "libcuda.so.${pkgver}" "${pkgdir}/usr/lib/libcuda.so.${pkgver}"
+  install -D -m755 "libnvcuvid.so.${pkgver}" "${pkgdir}/usr/lib/libnvcuvid.so.${pkgver}"
+  
   # nvidia-xconfig
   install -D -m755 nvidia-xconfig "${pkgdir}/usr/bin/nvidia-xconfig"
   install -D -m644 nvidia-xconfig.1.gz "${pkgdir}/usr/share/man/man1/nvidia-xconfig.1.gz"
