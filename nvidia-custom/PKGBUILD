@@ -6,7 +6,7 @@ pkgdesc="NVIDIA drivers for linux. Customized to be compatible with libgl. Use t
 arch=('i686' 'x86_64')
 url="http://www.nvidia.com/"
 depends=("linux>=3.6" "linux<3.7" "nvidia-utils-custom=${pkgver}")
-makedepends=
+makedepends=("linux-headers>=3.6" "linux-headers<3.7")
 conflicts=('nvidia' 'nvidia-bumblebee')
 provides=('nvidia')
 license=('custom')
