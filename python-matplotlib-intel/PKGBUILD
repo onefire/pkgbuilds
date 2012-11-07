@@ -1,0 +1,45 @@
+# Maintainer: onefire <onefire.myself@gmail.com>
+pkgname=python-matplotlib-intel
+pkgver=20121107
+pkgrel=1
+pkgdesc="Python 2D plotting library. Built with the Intel compiler and compatible with Python 3."
+arch=('any')
+url="https://github.com/matplotlib/matplotlib"
+depends=('python-numpy' 'python-dateutil' 'python-pytz' 'freetype2' 'libpng')
+makedepends=('git')
+provides=('python-matplotlib')
+conflicts=('python-matplotlib-git')
+license=('custom')
+_cudadir=/opt/cuda-toolkit
+_gitroot=git://github.com/matplotlib/matplotlib.git
+_gitname=matplotlib
+
+build() {
+  cd "${srcdir}"
+  msg "Connecting to GIT server...."
+
+  if [[ -d "$_gitname" ]]; then
+    cd "$_gitname" && git pull origin
+    msg "The local files are updated."
+  else
+    git clone "$_gitroot" "$_gitname"
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting build..."
+
+  cd "${srcdir}"/"${_gitname}"
+
+  sed '/import os/iimport numpy.distutils.intelccompiler' setup.py > junk && mv junk setup.py
+  python setup.py config --compiler=intelem build --compiler=intelem 	
+}
+
+package() {
+  cd "${srcdir}"/"${_gitname}"    
+  python setup.py install --prefix=/usr --root=${pkgdir}
+}
+
+                
+
+
+
