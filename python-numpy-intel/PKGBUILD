@@ -1,6 +1,7 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=python-numpy-intel
-pkgver=1.6.2
+pkgver=1.7.0
+_pkgver=1.7.0b2
 pkgrel=1
 pkgdesc="Numpy built with Intel's Math Kernel Library. Optimized for performance. Intel's mkl is not listed as a dependency, but you NEED TO INSTALL IT FIRST (manually or via AUR)"
 arch=(x86_64)
@@ -13,12 +14,12 @@ license=('custom')
 options=(!strip)
 groups=('custom' 'python-intel')
 
-sha256sums=('0b83d96ab79711b548470b7aeee1272c4ba8fcbba6586a67116b566a21ed16c6')
+sha256sums=('e1b3f6a85f255b7906f4e23e790d086e30b029020dcc6059bdded49af431d4e4')
 
-source=("http://downloads.sourceforge.net/numpy/numpy-${pkgver}.tar.gz")
+source=("http://downloads.sourceforge.net/numpy/numpy-${_pkgver}.tar.gz")
 
 build() {
-  cd ${srcdir}/numpy-${pkgver}
+  cd ${srcdir}/numpy-${_pkgver}
   cp site.cfg.example site.cfg
   
   echo "[mkl]" >> site.cfg
@@ -34,7 +35,7 @@ build() {
 }
 
 package() {
-  cd ${srcdir}/numpy-${pkgver}
+  cd ${srcdir}/numpy-${_pkgver}
   python setup.py install --prefix=/usr --root=${pkgdir}
   install -m755 -d "${pkgdir}/usr/share/licenses/python-numpy"
   install -m644 LICENSE.txt "${pkgdir}/usr/share/licenses/python-numpy/"
