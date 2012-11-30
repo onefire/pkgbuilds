@@ -1,0 +1,36 @@
+# Maintainer: onefire <onefire.myself@gmail.com>
+pkgname=octave-devel
+_pkgname=octave
+pkgver=20121129
+pkgrel=1
+pkgdesc="Development version of Octave"
+arch=('any')
+url="http://www.octave.org/hg/octave"
+depends=('qscintilla' 'gperf' 'fftw' 'pcre' 'curl' 'lapack' 'libx11' 'graphicsmagick' 'glpk' 'hdf5' 'gcc-libs' 'qhull' 'fltk' 'suitesparse')
+makedepends=('mercurial' 'git' 'texinfo' 'graphicsmagick' 'gcc-fortran' 'suitesparse' 'texlive-core')
+provides=('octave')
+conflicts=('octave')
+license=('GPL')
+
+build() {
+  hg clone http://www.octave.org/hg/octave
+  cd "${srcdir}"/"${_pkgname}"
+  ./bootstrap
+  ./configure --enable-shared --disable-static --with-umfpack="-lumfpack -lsuitesparseconfig" --prefix=/usr --enable-jit
+  make -j 16	
+}
+
+check() {
+  cd "${srcdir}"/"${_pkgname}"
+  make -j 16 check
+}
+
+package() {
+  cd "${srcdir}"/"${_pkgname}"
+  make -j 16 DESTDIR="${pkgdir}" install    
+}
+
+                
+
+
+

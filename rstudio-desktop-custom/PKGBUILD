@@ -1,6 +1,6 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=rstudio-desktop-custom
-pkgver=0.97.173
+pkgver=0.97.237
 pkgrel=1
 pkgdesc="An IDE for R"
 arch=('i686' 'x86_64')
@@ -13,11 +13,11 @@ groups=('custom')
 
 if [ "$CARCH" = "i686" ]; then
 	_arch=i386
-	sha256sums=('46558e4dbd186bfb003708e3b7a7a18cf4667fd08213fb4f44fffc0054a7a4ca')
+	sha256sums=('206b15f32aba24353087d4f25e927850352234949d3478dd4c74cd02923071bf')
 
 elif [ "$CARCH" = "x86_64" ]; then
 	_arch=amd64
-	sha256sums=('1c5baef1767867d2d58eccd4ff12c34568e07fc8aede9ad3161f5df75cce88ed')
+	sha256sums=('8dac76b7edcd69e8fc7793743442fc0fbd350c4887694992e0ba75aa8aa54527')
 fi
 
 source=("http://download1.rstudio.org/rstudio-${pkgver}-${_arch}.deb")
