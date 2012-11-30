@@ -2,7 +2,8 @@
 pkgname=python-numpy-intel
 pkgver=1.7.0
 _pkgver=1.7.0b2
-pkgrel=1
+_intelver=2013.1.117
+pkgrel=2
 pkgdesc="Numpy built with Intel's Math Kernel Library. Optimized for performance. Intel's mkl is not listed as a dependency, but you NEED TO INSTALL IT FIRST (manually or via AUR)"
 arch=(x86_64)
 url="http://numpy.scipy.org/"
@@ -23,8 +24,8 @@ build() {
   cp site.cfg.example site.cfg
   
   echo "[mkl]" >> site.cfg
-  echo "library_dirs = /opt/intel/composer_xe_2013.0.079/mkl/lib/intel64" >> site.cfg
-  echo "include_dirs = /opt/intel/composer_xe_2013.0.079/mkl/include" >> site.cfg
+  echo "library_dirs = /opt/intel/composer_xe_${_intelver}/mkl/lib/intel64" >> site.cfg
+  echo "include_dirs = /opt/intel/composer_xe_${_intelver}/mkl/include" >> site.cfg
   echo "mkl_libs = mkl_rt" >> site.cfg
   echo "lapack_libs =" >> site.cfg
   
@@ -40,7 +41,7 @@ package() {
   install -m755 -d "${pkgdir}/usr/share/licenses/python-numpy"
   install -m644 LICENSE.txt "${pkgdir}/usr/share/licenses/python-numpy/"
   install -m755 -d ${pkgdir}/etc/profile.d
-  echo "export LD_LIBRARY_PATH=/opt/intel/composer_xe_2013.0.079/mkl/lib/intel64:/opt/intel/composer_xe_2013.0.079/compiler/lib/intel64:\$LD_LIBRARY_PATH" > ${pkgdir}/etc/profile.d/numpy.sh
+  echo "export LD_LIBRARY_PATH=/opt/intel/composer_xe_${_intelver}/mkl/lib/intel64:/opt/intel/composer_xe_${_intelver}/compiler/lib/intel64:\$LD_LIBRARY_PATH" > ${pkgdir}/etc/profile.d/numpy.sh
 }
 
 
