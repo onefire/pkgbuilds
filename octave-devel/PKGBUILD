@@ -1,7 +1,7 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=octave-devel
 _pkgname=octave
-pkgver=20121129
+pkgver=20121213
 pkgrel=1
 pkgdesc="Development version of Octave"
 arch=('any')
