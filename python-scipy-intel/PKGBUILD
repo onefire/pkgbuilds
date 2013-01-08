@@ -2,7 +2,7 @@
 pkgname=python-scipy-intel
 pkgver=0.11.0
 _intelver=2013.1.117
-pkgrel=2
+pkgrel=3
 pkgdesc="Scipy built with Intel's Math Kernel Library. Optimized for performance. Intel's mkl is not listed as a dependency, but you NEED TO INSTALL IT FIRST (manually or via AUR)"
 arch=(x86_64)
 url="http://numpy.scipy.org/"

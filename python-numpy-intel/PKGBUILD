@@ -1,9 +1,9 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=python-numpy-intel
 pkgver=1.7.0
-_pkgver=1.7.0b2
+_pkgver=1.7.0rc1
 _intelver=2013.1.117
-pkgrel=2
+pkgrel=3
 pkgdesc="Numpy built with Intel's Math Kernel Library. Optimized for performance. Intel's mkl is not listed as a dependency, but you NEED TO INSTALL IT FIRST (manually or via AUR)"
 arch=(x86_64)
 url="http://numpy.scipy.org/"
@@ -15,7 +15,7 @@ license=('custom')
 options=(!strip)
 groups=('custom' 'python-intel')
 
-sha256sums=('e1b3f6a85f255b7906f4e23e790d086e30b029020dcc6059bdded49af431d4e4')
+sha256sums=('45ea23622f72d86bc3614446d668ee962c0475ee7b91a93ef85a5e0493962de5')
 
 source=("http://downloads.sourceforge.net/numpy/numpy-${_pkgver}.tar.gz")
 
