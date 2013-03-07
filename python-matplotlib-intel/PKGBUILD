@@ -1,6 +1,6 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=python-matplotlib-intel
-pkgver=20130107
+pkgver=20130307
 pkgrel=1
 pkgdesc="Python 2D plotting library. Built with the Intel compiler and compatible with Python 3."
 arch=('any')
@@ -10,7 +10,6 @@ makedepends=('git')
 provides=('python-matplotlib')
 conflicts=('python-matplotlib-git')
 license=('custom')
-_cudadir=/opt/cuda-toolkit
 _gitroot=git://github.com/matplotlib/matplotlib.git
 _gitname=matplotlib
 
