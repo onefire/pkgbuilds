@@ -1,9 +1,9 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=python-numpy-intel
 pkgver=1.7.0
-_pkgver=1.7.0rc1
 _intelver=2013.1.117
-pkgrel=3
+_mklroot=/opt/intel/composer_xe_${_intelver}
+pkgrel=4
 pkgdesc="Numpy built with Intel's Math Kernel Library. Optimized for performance. Intel's mkl is not listed as a dependency, but you NEED TO INSTALL IT FIRST (manually or via AUR)"
 arch=(x86_64)
 url="http://numpy.scipy.org/"
@@ -15,17 +15,17 @@ license=('custom')
 options=(!strip)
 groups=('custom' 'python-intel')
 
-sha256sums=('45ea23622f72d86bc3614446d668ee962c0475ee7b91a93ef85a5e0493962de5')
+sha256sums=('f4fa70b7edbab65ee6432eb63743f5489f1919c614632b20b2fb45aa7e682ac6')
 
-source=("http://downloads.sourceforge.net/numpy/numpy-${_pkgver}.tar.gz")
+source=("http://downloads.sourceforge.net/numpy/numpy-${pkgver}.tar.gz")
 
 build() {
-  cd ${srcdir}/numpy-${_pkgver}
+  cd ${srcdir}/numpy-${pkgver}
   cp site.cfg.example site.cfg
   
   echo "[mkl]" >> site.cfg
-  echo "library_dirs = /opt/intel/composer_xe_${_intelver}/mkl/lib/intel64" >> site.cfg
-  echo "include_dirs = /opt/intel/composer_xe_${_intelver}/mkl/include" >> site.cfg
+  echo "library_dirs = ${_mklroot}/mkl/lib/intel64" >> site.cfg
+  echo "include_dirs = ${mklroot}/mkl/include" >> site.cfg
   echo "mkl_libs = mkl_rt" >> site.cfg
   echo "lapack_libs =" >> site.cfg
   
@@ -36,12 +36,12 @@ build() {
 }
 
 package() {
-  cd ${srcdir}/numpy-${_pkgver}
+  cd ${srcdir}/numpy-${pkgver}
   python setup.py install --prefix=/usr --root=${pkgdir}
   install -m755 -d "${pkgdir}/usr/share/licenses/python-numpy"
   install -m644 LICENSE.txt "${pkgdir}/usr/share/licenses/python-numpy/"
   install -m755 -d ${pkgdir}/etc/profile.d
-  echo "export LD_LIBRARY_PATH=/opt/intel/composer_xe_${_intelver}/mkl/lib/intel64:/opt/intel/composer_xe_${_intelver}/compiler/lib/intel64:\$LD_LIBRARY_PATH" > ${pkgdir}/etc/profile.d/numpy.sh
+  echo "export LD_LIBRARY_PATH=${_mklroot}/mkl/lib/intel64:${_mklroot}/compiler/lib/intel64:\$LD_LIBRARY_PATH" > ${pkgdir}/etc/profile.d/numpy.sh
 }
 
 
