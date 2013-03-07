@@ -4,8 +4,8 @@
 
 pkgbase=linux               # Build stock -ARCH kernel
 #pkgbase=linux-custom       # Build kernel with a different name
-_srcname=linux-3.7
-pkgver=3.7.9
+_srcname=linux-3.8
+pkgver=3.8.2
 pkgrel=9
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -19,17 +19,13 @@ source=("http://www.kernel.org/pub/linux/kernel/v3.x/${_srcname}.tar.xz"
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
         'change-default-console-loglevel.patch'
-        'fat-3.6.x.patch'
-        'CVE-2013-1763.patch'
         'nvidia_fix.patch')
-md5sums=('21223369d682bcf44bcdfe1521095983'
-         '375fa67b3daba9e6040f13a0a29bf543'
+md5sums=('1c738edfc54e7c65faeb90c436104e2f'
+         'e282fcff76e975e121e0636018e31a56'
          '6a6b620836639fa5f989f9c9c2592d6e'
          '03666db0cd0a1f59c0b71b41eb2353eb'
          'eb14dcfd80c00852ef81ded6e826826a'
          '9d3c56a4b999c8bfbd4018089a62f662'
-         '88d501404f172dac6fcb248978251560'
-         '420991808fe4cba143013427c0737aa9'
          '4c307c0f0363df2664270c589c7f7ab6')
 
 _kernelname=${pkgbase#linux}
@@ -50,11 +46,11 @@ build() {
 
   # Fix security vulnetability CVE-2013-1763.patch
   # https://bugs.archlinux.org/task/34005
-  patch -Np1 -i "${srcdir}/CVE-2013-1763.patch"
+  #patch -Np1 -i "${srcdir}/CVE-2013-1763.patch"
 
   # fix cosmetic fat issue
   # https://bugs.archlinux.org/task/32916
-  patch -Np1 -i "${srcdir}/fat-3.6.x.patch"
+  #patch -Np1 -i "${srcdir}/fat-3.6.x.patch"
  
   # See: 
   # https://bugzilla.kernel.org/show_bug.cgi?id=42696
