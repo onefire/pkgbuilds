@@ -2,7 +2,7 @@
 pkgname=gsl-intel
 _pkg=gsl
 pkgver=1.15
-pkgrel=2
+pkgrel=3
 pkgdesc="The GNU Scientific Library (GSL). Built with the Intel compilers"
 url="http://www.gnu.org/software/gsl/gsl.html"
 source=("ftp://ftp.gnu.org/gnu/$_pkg/$_pkg-$pkgver.tar.gz")
@@ -21,6 +21,11 @@ build() {
   ./configure --prefix=/usr FC=ifort CC=icc CFLAGS="-O3 -m64 -openmp -fp-model strict -fomit-frame-pointer -xhost"  
   make -j 16
 }
+
+check() {
+  cd ${srcdir}/${_pkg}-${pkgver}
+  make -j 16 check
+}  	
 
 package() {
   cd ${srcdir}/${_pkg}-${pkgver}
