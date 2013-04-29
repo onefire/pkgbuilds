@@ -1,7 +1,6 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=python-scipy-intel
 pkgver=0.12.0
-_pkgver=0.12.0b1
 pkgrel=1
 pkgdesc="Scipy built with Intel's Math Kernel Library. Optimized for performance. Intel's mkl is not listed as a dependency, but you NEED TO INSTALL IT FIRST (manually or via AUR)"
 arch=(x86_64)
@@ -14,17 +13,17 @@ license=('custom')
 options=(!strip)
 groups=('custom' 'python-intel')
 
-sha256sums=('c8e88449675b25ac7db99e15a1181fdae72643a4b75e904aadeadb15d3141ff6')
+sha512sums=('80c8e137c3ccba86575d4263e144ba2c4684b94b5cd620e200f094c92d4e118ea6a631d27bdb259b0869771dfaeeae68c0fdd37fdd740b9027ee185026e921d4')
 
-source=("http://downloads.sourceforge.net/scipy/scipy-${_pkgver}.tar.gz")
+source=("http://downloads.sourceforge.net/scipy/scipy-${pkgver}.tar.gz")
 
 build() {
-  cd ${srcdir}/scipy-${_pkgver}
+  cd ${srcdir}/scipy-${pkgver}
   python setup.py config --compiler=intelem --fcompiler=intelem build_clib --compiler=intelem --fcompiler=intelem build_ext --compiler=intelem --fcompiler=intelem
 }
 
 package() {
-  cd ${srcdir}/scipy-${_pkgver}
+  cd ${srcdir}/scipy-${pkgver}
   python setup.py install --prefix=/usr --root=${pkgdir}
   install -m755 -d "${pkgdir}/usr/share/licenses/python-scipy"
   install -m644 LICENSE.txt ${pkgdir}/usr/share/licenses/python-scipy/LICENSE  

@@ -1,6 +1,6 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=python-matplotlib-intel
-pkgver=20130307
+pkgver=20130429
 pkgrel=1
 pkgdesc="Python 2D plotting library. Built with the Intel compiler and compatible with Python 3."
 arch=('any')
