@@ -1,6 +1,6 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=rstudio-desktop-custom
-pkgver=0.97.320
+pkgver=0.97.449
 pkgrel=1
 pkgdesc="An IDE for R"
 arch=('i686' 'x86_64')
@@ -13,22 +13,20 @@ groups=('custom')
 
 if [ "$CARCH" = "i686" ]; then
 	_arch=i386
-	sha256sums=('a9b2e4cf9a1cd3881a9d579a491c69c43faffe6c939434d747c0a00f5fe506c0')
+	sha512sums=('1296aef32792bdb80dd63ffda4e8f472e5c779226555bf44eb7384163ce81b9feb8d5e39b3f25b532c8644925fe434a90adbb9e9d3d7c4c8bb3d64b928125eb4')
 
 elif [ "$CARCH" = "x86_64" ]; then
 	_arch=amd64
-	sha256sums=('dd77fd60a07a8870b5c857cbfe11b98e5ba30f00c55c44eb091a4cf280f76fa7')
+	sha512sums=('bbc7432425e0adc7d21fa8c96e79eea884a438d59fb56823bd55e7886c2b4e1294e59c5e16f6b77b6cee9dcd587e3a1b7b63e99827b46fb990bfcd0be6496b6d')
 fi
 
 source=("http://download1.rstudio.org/rstudio-${pkgver}-${_arch}.deb")
 
-build() {
+package() {
   msg "Getting contents of .deb package..."
   cd "$srcdir"
-  tar zxpf data.tar.gz -C "$pkgdir"
-}
-
-package() {
+  tar zxvf data.tar.gz -C "$pkgdir"
+  
   install -dm755 "$pkgdir/usr/bin"
   cd "$pkgdir/usr/lib/rstudio/bin"
   cd "$pkgdir/usr/bin"

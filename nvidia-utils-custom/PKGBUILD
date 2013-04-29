@@ -1,6 +1,6 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=nvidia-utils-custom
-pkgver=313.26
+pkgver=319.12
 pkgrel=1
 pkgdesc="NVIDIA drivers utilities and libraries. Customized to be compatible with libgl. Use this coupled with my other "custom" packages to have CUDA without bumblebee on laptops."
 depends=('xorg-server' 'libxvmc')
@@ -16,12 +16,12 @@ groups=('nvidia-cuda' 'custom')
 if [ "$CARCH" = "i686" ]; then
 	_arch='x86'
 	_pkg="NVIDIA-Linux-${_arch}-${pkgver}"
-	sha256sums=("9d4864bb954315197a955fcb348ed1eaa0ceb5cdb74aeba7afc07f58c01aaece")
+	sha512sums=("a83968265a9c3b07e9c4efeef57ccb96d32dcd6e68406fff42d25f822dda7143c5d9a73497616a044ae8399f494f1087eb866ef349e37e4b01792c249c4da1b7")
 
 elif [ "$CARCH" = "x86_64" ]; then
 	_arch='x86_64'
 	_pkg="NVIDIA-Linux-${_arch}-${pkgver}-no-compat32"
-	sha256sums=("a8c24df16ad14750d11bd066f60a3c3e35972472a59ccc3e26dc60a0fd5fdbf3")
+	sha512sums=("05484c340b17440ada55ba69bb2b8082d9b2527aab260db3f980ba2a0cffb74f39aee0e704265184a9b9f4f075dfc5605aa610f4a014e5bf2c460c1a425cef86")
 fi
 
 source=("ftp://download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
