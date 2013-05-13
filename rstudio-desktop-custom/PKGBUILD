@@ -1,6 +1,6 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=rstudio-desktop-custom
-pkgver=0.97.449
+pkgver=0.97.551
 pkgrel=1
 pkgdesc="An IDE for R"
 arch=('i686' 'x86_64')
@@ -13,11 +13,11 @@ groups=('custom')
 
 if [ "$CARCH" = "i686" ]; then
 	_arch=i386
-	sha512sums=('1296aef32792bdb80dd63ffda4e8f472e5c779226555bf44eb7384163ce81b9feb8d5e39b3f25b532c8644925fe434a90adbb9e9d3d7c4c8bb3d64b928125eb4')
+	sha512sums=('9c349eca65731457c37268dc6426c08999c5c7a6797cf1e03d2f40caa69f613dc4088533805549e0b20567342d32c2e2fe740ac63591b3919e30bc0c6eb33e04')
 
 elif [ "$CARCH" = "x86_64" ]; then
 	_arch=amd64
-	sha512sums=('bbc7432425e0adc7d21fa8c96e79eea884a438d59fb56823bd55e7886c2b4e1294e59c5e16f6b77b6cee9dcd587e3a1b7b63e99827b46fb990bfcd0be6496b6d')
+	sha512sums=('5cee11d4b8fbbe658bc33f94cc65a358a24a2d2b50e1a1ebdbe9695ee28b83c0b2dc3ff9f77672f5313e50ae1acb775d20d5f18aa07afbfeb265ed9adf497d27')
 fi
 
 source=("http://download1.rstudio.org/rstudio-${pkgver}-${_arch}.deb")

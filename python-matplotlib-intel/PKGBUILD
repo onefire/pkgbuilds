@@ -2,7 +2,7 @@
 pkgname=python-matplotlib-intel
 _pkgname=matplotlib
 pkgver=1.2.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Python 2D plotting library. Built with the Intel compiler and compatible with Python 3."
 arch=(x86_64)
 url="http://matplotlib.org/"
