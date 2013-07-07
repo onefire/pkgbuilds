@@ -2,7 +2,7 @@
 pkgname=gsl-intel
 _pkg=gsl
 pkgver=1.15
-pkgrel=3
+pkgrel=4
 pkgdesc="The GNU Scientific Library (GSL). Built with the Intel compilers"
 url="http://www.gnu.org/software/gsl/gsl.html"
 source=("ftp://ftp.gnu.org/gnu/$_pkg/$_pkg-$pkgver.tar.gz")
@@ -13,7 +13,7 @@ depends=('glibc' 'bash')
 conflicts=('gsl')
 provides=('gsl')
 options=('!libtool')
-sha256sums=('85b907e57902e2b7606ef3aef960302ffdd13bd9dc5b8fcbfa75e4f0bf340ea3')
+sha512sums=('dcea557bcd34d4ee6d2c52741c2f95702e5e6110a99f033b412489b1930d21a40ead29392f754656375801d706df01199878263e856ca3081f9a514dc3299185')
 
 build() {
   unset LDFLAGS
