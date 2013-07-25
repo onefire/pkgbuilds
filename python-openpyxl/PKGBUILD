@@ -1,0 +1,29 @@
+#Maintainer: onefire <onefire.myself@gmail.com>
+pkgname=python-openpyxl
+pkgver=1.6.2
+pkgtag_=dc1bfe095ee3
+pkgrel=2
+pkgdesc="A Python library to read/write Excel 2007 xlsx/xlsm files."
+arch=('any')
+license=('MIT')
+url="https://bitbucket.org/ericgazoni/openpyxl"
+depends=('python' 'python-distribute')
+conflicts=()
+replaces=()
+source=(https://bitbucket.org/ericgazoni/openpyxl/get/$pkgver.tar.gz)
+sha512sums=('1e0dc45745d29635b97cdebe03a271f435564485f797d9266d3a042cf3fbd5790bafca2890286ea1bfeae4118dd7bb14c6352970a91d90c5f37687909be4c41a')
+
+build()	{
+	cd $srcdir/ericgazoni-openpyxl-${pkgtag_}
+	python setup.py build
+}
+	
+
+package() {
+  cd $srcdir/ericgazoni-openpyxl-${pkgtag_}
+  python setup.py install --prefix=/usr \
+                          --root=$pkgdir \
+                          --optimize=1
+}
+
+
