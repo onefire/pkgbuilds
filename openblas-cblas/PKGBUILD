@@ -1,19 +1,19 @@
-# Maintainer: Giuseppe Borzi <gborzi _AT_ ieee _DOT_ org>
+# Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=openblas-cblas
 _pkgname=OpenBLAS
 pkgver=0.2.8
-pkgrel=2
-pkgdesc="An optimized BLAS library based on GotoBLAS2 1.13 BSD "
+pkgrel=3
+pkgdesc="C interface to OpenBLAS, an optimized BLAS library based on GotoBLAS2 1.13 BSD, built with the Intel compilers."
 arch=('x86_64')
 url="http://xianyi.github.com/OpenBLAS/"
 license=('BSD')
 depends=('gcc-libs')
-makedepends=('perl' 'gcc-fortran')
+makedepends=('perl')
 provides=('cblas=3.4.2')
 conflicts=('cblas')
 options=(!makeflags)
 source=(${_pkgname}-v${pkgver}.tar.gz::http://github.com/xianyi/OpenBLAS/archive/v${pkgver}.tar.gz)
-md5sums=('19f38a32bc9e6e56f2b6874d7497baf0')
+sha512sums=('35ac8d78e57950ba931d99317bc6b2cb4f460ff7882e456c9a13bb1ab7f42d12f3158ffd4ef7c46d2ee523b5c4abf204c4056a1d8f1954da50d176ffaaac5525')
 
 build() {
   cd "$srcdir/$_pkgname-$pkgver"
@@ -43,5 +43,3 @@ package() {
   ln -sf libcblas_*-r$pkgver.so libcblas.so
   ln -sf libcblas_*-r$pkgver.so libcblas.so.3
 }
-
-# vim:set ts=2 sw=2 et:
