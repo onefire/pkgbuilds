@@ -1,0 +1,47 @@
+# Maintainer: Giuseppe Borzi <gborzi _AT_ ieee _DOT_ org>
+pkgname=openblas-cblas
+_pkgname=OpenBLAS
+pkgver=0.2.8
+pkgrel=2
+pkgdesc="An optimized BLAS library based on GotoBLAS2 1.13 BSD "
+arch=('x86_64')
+url="http://xianyi.github.com/OpenBLAS/"
+license=('BSD')
+depends=('gcc-libs')
+makedepends=('perl' 'gcc-fortran')
+provides=('cblas=3.4.2')
+conflicts=('cblas')
+options=(!makeflags)
+source=(${_pkgname}-v${pkgver}.tar.gz::http://github.com/xianyi/OpenBLAS/archive/v${pkgver}.tar.gz)
+md5sums=('19f38a32bc9e6e56f2b6874d7497baf0')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  unset CFLAGS
+  unset CXXFLAGS
+  NPROC=`grep "physical id" /proc/cpuinfo|sort|uniq|wc -l`
+  NCORE4PROC=`grep "cores" /proc/cpuinfo|sort|tail -n 1|sed -e 's/cpu cores.*: //'`
+  let NCORE=NPROC*NCORE4PROC
+  make CC=icc FC=ifort USE_OPENMP=1 ONLY_CBLAS=1 BINARY=64 \
+    NUM_THREADS=$NCORE LIBPREFIX=libcblas NO_LAPACK=1 MAJOR_VERSION=3 -j 16
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  NPROC=`grep "physical id" /proc/cpuinfo|sort|uniq|wc -l`
+  NCORE4PROC=` grep "cores" /proc/cpuinfo|sort|tail -n 1|sed -e 's/cpu cores.*: //'`
+  let NCORE=NPROC*NCORE4PROC
+  make PREFIX="$pkgdir/usr" NUM_THREADS=$NCORE LIBPREFIX=libcblas \
+    MAJOR_VERSION=3 install
+  
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+
+  cd "$pkgdir/usr/lib/"
+  ln -sf libcblas_*-r$pkgver.a libcblas.a
+  ln -sf libcblas_*-r$pkgver.so libcblas.so
+  ln -sf libcblas_*-r$pkgver.so libcblas.so.3
+}
+
+# vim:set ts=2 sw=2 et:
