@@ -1,8 +1,7 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=python-matplotlib-intel
 _pkgname=matplotlib
-pkgver=1.3
-_pkgver=1.3.0rc4
+pkgver=1.3.1rc2
 pkgrel=1
 pkgdesc="Python 2D plotting library. Built with the Intel compiler and compatible with Python 3."
 arch=(x86_64)
@@ -15,18 +14,18 @@ license=('custom')
 options=(!strip)
 groups=('custom' 'python-intel')
 
-sha512sums=('1a4191dda2ba1f0628ce7739d1fa52e9ee0854da0aeb2e5f582a0d0ba14fe1a5f373d358acb91913f11b40bea556b8d92c6a480d29262a243fda0649884d55cb')
+sha512sums=("2155294d2aae6f30a0d22ef153e363aa9aea2875629054843cea75762fff683b6a232de78aa45e22441c198e19dcf6d09fcba8883d32d33eeeb6a06f30aa1700")
 
-source=("https://downloads.sourceforge.net/project/${_pkgname}/${_pkgname}/${_pkgname}-${_pkgver}/${_pkgname}-${_pkgver}.tar.gz")
+source=("https://downloads.sourceforge.net/project/${_pkgname}/${_pkgname}/${_pkgname}-${pkgver}/${_pkgname}-${pkgver}.tar.gz")
 
 build() {
-  cd ${srcdir}/${_pkgname}-${_pkgver}
+  cd ${srcdir}/${_pkgname}-${pkgver}
    sed '/import os/iimport numpy.distutils.intelccompiler' setup.py > junk && mv junk setup.py
   python setup.py config --compiler=intelem build --compiler=intelem
 }
 
 package() {
-  cd ${srcdir}/${_pkgname}-${_pkgver}
+  cd ${srcdir}/${_pkgname}-${pkgver}
    python setup.py install --prefix=/usr --root=${pkgdir}
 }
 
