@@ -1,7 +1,7 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=python-scipy-intel
 pkgver=0.12.0
-pkgrel=2
+pkgrel=1
 pkgdesc="Scipy built with Intel's Math Kernel Library. Optimized for performance. Intel's mkl is not listed as a dependency, but you NEED TO INSTALL IT FIRST (manually or via AUR)"
 arch=(x86_64)
 url="http://numpy.scipy.org/"
@@ -28,8 +28,5 @@ package() {
   install -m755 -d "${pkgdir}/usr/share/licenses/python-scipy"
   install -m644 LICENSE.txt ${pkgdir}/usr/share/licenses/python-scipy/LICENSE  
   install -m755 -d ${pkgdir}/etc/profile.d
-  #Do not need this since that file is created when python-numpy-intel is installed.
-  #echo "export LD_LIBRARY_PATH=/opt/intel/composer_xe_${_intelver}/mkl/lib/intel64:/opt/intel/composer_xe_${_intelver}/compiler/lib/intel64:\$LD_LIBRARY_PATH" > ${pkgdir}/etc/profile.d/scipy.sh
 }
-
 
