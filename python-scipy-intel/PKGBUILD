@@ -1,6 +1,6 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=python-scipy-intel
-pkgver=0.12.0
+pkgver=0.13.2
 pkgrel=1
 pkgdesc="Scipy built with Intel's Math Kernel Library. Optimized for performance. Intel's mkl is not listed as a dependency, but you NEED TO INSTALL IT FIRST (manually or via AUR)"
 arch=(x86_64)
@@ -13,7 +13,7 @@ license=('custom')
 options=(!strip)
 groups=('custom' 'python-intel')
 
-sha512sums=('80c8e137c3ccba86575d4263e144ba2c4684b94b5cd620e200f094c92d4e118ea6a631d27bdb259b0869771dfaeeae68c0fdd37fdd740b9027ee185026e921d4')
+sha512sums=('ab9acb0a8b388eaf8528be4fd0bcbf954e9a6337a874d666bf1590d396018c5b818c08d0227b4655f45aa408d4e0f1c500588016a90c2dba0f03e2aa3f6a5c60')
 
 source=("http://downloads.sourceforge.net/scipy/scipy-${pkgver}.tar.gz")
 
