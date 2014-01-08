@@ -1,7 +1,7 @@
 # Maintainer: onefire <onefire.myself@gmail.com>
 pkgname=python-matplotlib-intel
 _pkgname=matplotlib
-pkgver=1.3.1rc2
+pkgver=1.3.1
 pkgrel=1
 pkgdesc="Python 2D plotting library. Built with the Intel compiler and compatible with Python 3."
 arch=(x86_64)
@@ -14,7 +14,7 @@ license=('custom')
 options=(!strip)
 groups=('custom' 'python-intel')
 
-sha512sums=("2155294d2aae6f30a0d22ef153e363aa9aea2875629054843cea75762fff683b6a232de78aa45e22441c198e19dcf6d09fcba8883d32d33eeeb6a06f30aa1700")
+sha512sums=("04877aa15b6d52a6f813e8377098d13c432f66ae2522c544575440180944c9b73a2164ae63edd3a0eff807883bf7b39cd55f28454ccee8c76146567ff4a6fd40")
 
 source=("https://downloads.sourceforge.net/project/${_pkgname}/${_pkgname}/${_pkgname}-${pkgver}/${_pkgname}-${pkgver}.tar.gz")
 
