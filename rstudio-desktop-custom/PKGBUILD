@@ -29,6 +29,7 @@ package() {
   
   install -dm755 "$pkgdir/usr/bin"
   cd "$pkgdir/usr/lib/rstudio/bin"
+  rm lib*.so.*
   cd "$pkgdir/usr/bin"
   ln -s -f ../lib/rstudio/bin/rstudio rstudio-bin
 }
